@@ -232,7 +232,7 @@ main img {
 .forms {
     background-color: var(--color-secundario);
     text-align: center;
-    padding: 40px 0 40px 0;
+    padding: 40px 0 0px 0;
 }
 
 .forms h2 {
