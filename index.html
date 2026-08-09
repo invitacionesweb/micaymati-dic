@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -182,6 +182,17 @@ con nosotros.¡Será un evento solo para adultos! </p>
     <option value="Celíaco">Celíaco</option>
   </select>
 
+  <select name="ACOMPANANTES" required>
+    <option value="" disabled selected>¿Cuántas personas te acompañan?</option>
+    <option value="0">0</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+  </select>
+
+  <div id="acompanantes-container"></div>
+
   <textarea name="MENSAJE" placeholder="Dejale un mensaje a los novios 🤍"></textarea>
     <textarea name="CANCION" placeholder="Recomendale una canción al Dj 🎶"></textarea>
 
@@ -204,7 +215,7 @@ Pero si querés ayudarnos con nuestra soñada luna de miel...
     <div class="botones">
       <a  data-aos="fade-in"  class="boton" onclick="copyToClipboard('MicayMati.ARS')" >ALIAS EN PESOS</a>
       <a  data-aos="fade-in"  class="boton" onclick="copyToClipboard('MicayMati.USD')">ALIAS EN USD</a>
-     
+
     </div>
      <p  data-aos="fade-up" >Hace clic para copiar los datos. <br> Titular: Matias Nicolas Menicillo</p>
   </div>
@@ -245,6 +256,7 @@ Pero si querés ayudarnos con nuestra soñada luna de miel...
 
      </footer>
            <script src="form.js"></script>
+           <script src="acompanantes.js"></script>
 
     <script>
 document.addEventListener("DOMContentLoaded", function () {
