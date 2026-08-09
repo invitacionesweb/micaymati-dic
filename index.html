@@ -159,22 +159,34 @@ con nosotros.¡Será un evento solo para adultos! </p>
 
  <form name="asistenciaform" method="POST" action="https://script.google.com/macros/s/AKfycbzROBWHyJTmUQIMhD3e2wjsTzFBqzWSLZpNNS9f4hA1NqljOTNjRfcnpzAFVcEf_N9mtw/exec" class="formulario">
 
-  <label data-aos="fade-up" class="formtitle">¿Venís?</label>
-  <div class="radio-group">
-    <label class="radio-option">
-      <input type="radio" name="ASISTENCIA" value="sí" required />
-      <span>Sí</span>
-    </label>
-    <label class="radio-option">
-      <input type="radio" name="ASISTENCIA" value="no" />
-      <span>No</span>
-    </label>
-  </div>
+   <label data-aos="fade-up" class="formtitle">Sólo faltas vos, Venis?</label>
 
-  <input type="text" name="NOMBRE" placeholder="Nombre" required />
-  <input type="text" name="APELLIDO" placeholder="Apellido" required />
+            <div class="radio-group">
+                <label class="radio-option">
+                <input type="radio" name="ASISTENCIA" value="sí" required />
+                <span>Sí</span>
+                </label>
+                <label class="radio-option">
+                <input type="radio" name="ASISTENCIA" value="no" />
+                <span>No</span>
+                </label>
+            </div>
 
-  <select name="DIETA" required>
+            <input type="text" name="NOMBRE" placeholder="Nombre" required />
+            <input type="text" name="APELLIDO" placeholder="Apellido" required />
+
+            <select name="ACOMPANANTES" id="acompanantes" required>
+                <option value="" disabled selected>¿Cuántas personas te acompañan?</option>
+                <option value="Solo yo">Solo yo</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+
+            <template id="acompanantes-anchor"></template>
+
+            <select name="DIETA" required>
     <option value="" disabled selected>Dieta</option>
     <option value="Nada">Nada</option>
     <option value="Vegano">Vegano</option>
@@ -182,20 +194,9 @@ con nosotros.¡Será un evento solo para adultos! </p>
     <option value="Celíaco">Celíaco</option>
   </select>
 
-  <select name="ACOMPANANTES" required>
-    <option value="" disabled selected>¿Cuántas personas te acompañan?</option>
-    <option value="0">0</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-  </select>
+        <input type="text" name="CANCION" placeholder="Recomendale una canción al dj 🎶"  />
 
-  <div id="acompanantes-container"></div>
-
-  <textarea name="MENSAJE" placeholder="Dejale un mensaje a los novios 🤍"></textarea>
-    <textarea name="CANCION" placeholder="Recomendale una canción al Dj 🎶"></textarea>
-
+             <input type="text" name="MENSAJE" placeholder="Dejale un mensaje a los novios 🤍"  />
   <button type="submit" class="boton">Enviar</button>
 </form>
 
@@ -257,6 +258,34 @@ Pero si querés ayudarnos con nuestra soñada luna de miel...
      </footer>
            <script src="form.js"></script>
            <script src="acompanantes.js"></script>
+            <script>
+        (function () {
+            var select = document.getElementById('acompanantes');
+            var anchor = document.getElementById('acompanantes-anchor');
+
+            select.addEventListener('change', function () {
+                // saca los campos generados en la vuelta anterior
+                document.querySelectorAll('.acompanante-input').forEach(function (el) {
+                    el.remove();
+                });
+
+                var valor = this.value;
+                var cantidad = (valor === 'Solo yo' || valor === '') ? 0 : parseInt(valor, 10);
+
+                for (var i = cantidad; i >= 1; i--) {
+                    var input = document.createElement('input');
+                    input.type = 'text';
+                    input.name = 'ACOMPANANTE_' + i;
+                    input.placeholder = 'Nombre y apellido de acompañante ' + i;
+                    input.required = true;
+                    input.className = 'acompanante-input';
+                    // se inserta como hermano directo dentro del form, para heredar
+                    // el mismo espaciado que el resto de los campos
+                    anchor.insertAdjacentElement('afterend', input);
+                }
+            });
+        })();
+        </script>
 
     <script>
 document.addEventListener("DOMContentLoaded", function () {
